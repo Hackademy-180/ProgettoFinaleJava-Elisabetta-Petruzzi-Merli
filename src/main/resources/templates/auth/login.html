@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{index :: head}">
+    
+</head>
+<body>
+
+
+    <div class="vh-100">
+        <br/><br/><br/>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div th:if="${param.error}">
+                        <div class="alert alert-danger">Invalid Email or Password</div>
+                    </div>
+                    <div th:if="${param.logout}">
+                        <div class="alert alert-success">You have been logged out</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="text-center">Login Form</h2>                            
+                        </div>
+                        <div class="card-body">
+                             <form th:action="@{/perform_login}" method="post" role="form" class="form-horizontal">
+                            <div class="form-group mb-3">
+                                <label class="control-label">Email</label>
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Enter email" >
+                            </div>
+                            <div class="form-group mb-3">
+                                <label class="control-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" >
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary" type="submit">Submit</button>
+                                <span>Not refistered?
+                                    <a th:href="@{/register}">Register/Signup here</a>
+                                </span>
+                            </div>
+                            
+                            
+                            
+                        </form>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <head th:insert="~{index :: footer}"></head>
+    <script th:replace="~{index :: bootstrapScript}"></script>
+
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+
+<h2>Login</h2>
+
+<form action="/perform_login" method="post">
+    <input type="text" name="username" placeholder="email"/>
+    <input type="password" name="password" placeholder="password"/>
+    <button type="submit">Login</button>
+</form>
+
+</body>
+</html> -->
