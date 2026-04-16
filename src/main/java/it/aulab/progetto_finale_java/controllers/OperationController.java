@@ -74,7 +74,7 @@ public class OperationController {
     }
 
     // rotta per l'accettazione di una richiesta 
-    @PostMapping("/career/request/accept/{reqestId}")
+    @PostMapping("/career/request/accept/{requestId}")
     public String careerRequestAccept(@PathVariable Long requestId, RedirectAttributes redirectAttributes){
         careerRequestService.careerAccept(requestId);
         redirectAttributes.addFlashAttribute("successMessage", "Ruolo abilitato per l'utente");

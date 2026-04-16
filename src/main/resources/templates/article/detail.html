@@ -21,8 +21,8 @@
                 <div id="carouselExample" class="carousel slide">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img th:src="${article.image.path}" class="card-img-top" alt="..." th:if="${article.image != null}">
-                            <img th:src="@{/images/default.jpg}" class="card-img-top" alt="..." th:if="${article.image != null}">
+                            <img th:if="${article.image != null}" th:src="${article.image.path}" class="card-img-top img-fluid" alt="immagine dell'articolo">
+                            <img th:unless="${article.image != null}" th:src="@{/images/default.jpg}" class="card-img-top img-fluid" alt="immagine di default">
                         </div>
                         
                     </div>

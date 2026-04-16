@@ -10,5 +10,5 @@ import it.aulab.progetto_finale_java.models.Article;
 public interface ImageService {
     void saveImageOnDB(String url, Article article);
     CompletableFuture<String> saveImageOnCloud(MultipartFile file) throws Exception;
-    void deletImage(String imagePath) throws IOException;
+    void deleteImage(String imagePath) throws IOException;
 }

@@ -101,7 +101,7 @@ public class ArticleService implements CrudService<ArticleDto, Article, Long>{
                 // elimino immagine precedente 
                 try{
 
-                    imageService.deletImage(article.getImage().getPath());
+                    imageService.deleteImage(article.getImage().getPath());
                     try{
                         // salvo la nuova immagine
                         CompletableFuture<String> futureUrl = imageService.saveImageOnCloud(file);
@@ -143,7 +143,20 @@ public class ArticleService implements CrudService<ArticleDto, Article, Long>{
 
     @Override
     public void delete(Long key) {
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+       if(articleRepository.existsById(key)){
+            Article article = articleRepository.findById(key).get();
+            try{
+                String path = article.getImage().getPath();
+                article.getImage().setArticle(null);
+                imageService.deleteImage(path);
+
+            }catch(Exception e ){
+                e.printStackTrace();
+            }
+            articleRepository.deleteById(key);
+       }else{
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+       }
         
     }
 

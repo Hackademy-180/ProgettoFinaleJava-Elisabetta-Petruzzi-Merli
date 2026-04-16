@@ -52,32 +52,25 @@ public class UserController {
     private ModelMapper modelMapper;
 
     // rotta home
-    // @GetMapping("/")
-    // public String home(Model viewModel){
-        
-    //     // recupero tutti gli articoli accettati
-    //     // List<ArticleDto> articles = articleService.readAll();
-
-    //     List<ArticleDto> articles= new ArrayList<ArticleDto>();
-    //     for(Article article: articleRepository.findByIsAcceptedTrue()){
-    //         articles.add(modelMapper.map(article, ArticleDto.class));
-    //     }
-
-    //     // ordino ed invio al template gli articoli ordinati in modo decrescente
-    //     Collections.sort(articles,Comparator.comparing(ArticleDto::getPublishDate,Comparator.nullsLast(Comparator.naturalOrder())).reversed());
-
-    //     List<ArticleDto> lastThreeArticles = articles.stream().limit(3).collect(Collectors.toList());
-
-    //     viewModel.addAttribute("articles", lastThreeArticles);
-
-    //     return "home";
-    // }
-
-    // rotta home (prova)
     @GetMapping("/")
-public String home(Model viewModel){
-    return "home";
-}
+    public String home(Model viewModel){
+        
+        // recupero tutti gli articoli accettati
+
+        List<ArticleDto> articles= new ArrayList<ArticleDto>();
+        for(Article article: articleRepository.findByIsAcceptedTrue()){
+            articles.add(modelMapper.map(article, ArticleDto.class));
+        }
+
+        // ordino ed invio al template gli articoli ordinati in modo decrescente
+        Collections.sort(articles,Comparator.comparing(ArticleDto::getPublishDate,Comparator.nullsLast(Comparator.naturalOrder())).reversed());
+
+        List<ArticleDto> lastThreeArticles = articles.stream().limit(3).collect(Collectors.toList());
+
+        viewModel.addAttribute("articles", lastThreeArticles);
+
+        return "home";
+    }
 
     // rotta registrazione
     @GetMapping("/register")

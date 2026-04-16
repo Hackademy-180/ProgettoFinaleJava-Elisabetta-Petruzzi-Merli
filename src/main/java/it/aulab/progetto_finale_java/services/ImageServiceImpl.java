@@ -43,6 +43,7 @@ public class ImageServiceImpl implements ImageService{
 
     private final RestTemplate restTemplate = new RestTemplate();
 
+    @Override
     public void saveImageOnDB(String url, Article article){
         url = url.replace(supabaseBucket, supabaseImage);
         imageRepository.save(Image.builder().path(url).article(article).build());
@@ -52,7 +53,7 @@ public class ImageServiceImpl implements ImageService{
     public CompletableFuture<String> saveImageOnCloud(MultipartFile file) throws Exception{
         if(!file.isEmpty()){
             try{
-                String nameFile= UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+                String nameFile= UUID.randomUUID().toString() + " " + file.getOriginalFilename();
 
                 String extension= StringManipulation.getFileExtension(nameFile);
 
@@ -98,12 +99,6 @@ public class ImageServiceImpl implements ImageService{
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.DELETE, entity, String.class);
 
         System.out.println(response.getBody());
-    }
-
-    @Override
-    public void deletImage(String imagePath) throws IOException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deletImage'");
     }
     
 }

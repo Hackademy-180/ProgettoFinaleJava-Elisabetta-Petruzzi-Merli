@@ -129,6 +129,13 @@ public class ArticleController {
         redirectAttributes.addFlashAttribute("successMessage", "Articolo modificato con successo");
         return "redirect:/articles";
     }
+    // rotta per la cancellazione di un articolo 
+    @GetMapping("/delete/{id}")
+    public String articleDelete(@PathVariable("id")Long id, RedirectAttributes redirectAttributes){
+        articleService.delete(id);
+        redirectAttributes.addFlashAttribute("successMessage", "Articolo cancellato con successo");
+        return "redirect:/writer/dashboard";
+    }
 
     // rotta dettaglio di un articolo per revisore
     @GetMapping("/revisor/detail/{id}")
